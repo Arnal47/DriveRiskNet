@@ -2,7 +2,36 @@
 
 ## Overview
 
-A reproducible PyTorch vehicle time-series risk-classification project, including realistic synthetic-data caveats, leakage checks, group-held-out evaluation, training baselines, and multi-seed stability analysis.
+PyTorch vehicle time-series risk classification project for demonstrating a reproducible autonomous-driving-oriented model training pipeline. It includes realistic synthetic-data caveats, leakage checks, group-held-out evaluation, training baselines, and multi-seed stability analysis.
+
+### Results at a glance
+
+- 6,000 sequences · 32 timesteps · 7 features
+- Group-disjoint 70/15/15 split · 3 training seeds (42, 123, 2026)
+- Majority and TTC heuristic baselines · MLP and LSTM neural models
+
+| Model | Test macro-F1 |
+|---|---:|
+| Majority baseline | 0.2566 |
+| TTC heuristic | 0.4928 |
+| MLP | 0.5794 ± 0.0060 |
+| LSTM | 0.5973 ± 0.0100 |
+
+LSTM shows a slight average improvement over MLP, but the difference is within run-to-run variance and is not sufficient evidence of clear superiority.
+
+Synthetic data is used to demonstrate the training and evaluation pipeline. Results do not represent real-world autonomous-driving safety performance.
+
+## Quick Start
+
+```bash
+python -m venv .venv
+# Activate the environment, then:
+python -m pip install -e ".[dev]"
+python -m driverisknet.train --model lstm --num-samples 6000 --epochs 35 --split group
+python -m driverisknet.multiseed
+python -m pytest -q
+python -m driverisknet.infer --checkpoint artifacts/checkpoints/lstm_best.pt --dataset data/synthetic_v1_1.npz --index 0
+```
 
 ## Task
 
