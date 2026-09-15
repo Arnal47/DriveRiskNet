@@ -17,13 +17,13 @@ from .utils import save_json, set_seed
 
 
 def run_training(model_name="lstm", num_samples=6000, epochs=35, output_dir="artifacts", seed=42,
-                 split_mode="group"):
+                 split_mode="group", data_seed=42, split_seed=42):
     started = time.perf_counter(); set_seed(seed); output_dir = Path(output_dir)
-    data_config = DataConfig(num_samples=num_samples, seed=seed)
+    data_config = DataConfig(num_samples=num_samples, seed=data_seed)
     train_config = TrainConfig(model=model_name, epochs=epochs, seed=seed)
     x, y, groups, case_ids = generate_synthetic_data(data_config)
     save_dataset(output_dir.parent / "data" / "synthetic_v1_1.npz", x, y, groups, case_ids, data_config)
-    splits, indices = split_data(x, y, groups, seed, split_mode)
+    splits, indices = split_data(x, y, groups, split_seed, split_mode)
     train_loader, val_loader, test_loader, mean, std = make_loaders(splits, train_config.batch_size, seed)
     train_y = splits[0][1]
     weights = compute_class_weight("balanced", classes=np.arange(3), y=train_y)
@@ -52,7 +52,7 @@ def run_training(model_name="lstm", num_samples=6000, epochs=35, output_dir="art
     save_json(baselines, output_dir / "baselines.json")
     elapsed = time.perf_counter() - started
     result = {"version": "1.1", "data_config": data_config.to_dict(), "train_config": train_config.to_dict(),
-              "split_mode": split_mode,
+              "split_mode": split_mode, "data_seed": data_seed, "split_seed": split_seed,
               "split_sizes": dict(zip(["train", "validation", "test"], [len(i) for i in indices])),
               "split_group_counts": dict(zip(["train", "validation", "test"], [len(np.unique(groups[i])) for i in indices])),
               "class_counts": {str(i): int((y == i).sum()) for i in range(3)},

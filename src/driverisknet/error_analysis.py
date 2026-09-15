@@ -6,8 +6,8 @@ from .data import CASE_NAMES
 
 def build_error_analysis(x, y_true, probabilities, case_ids, limit=20):
     y_pred = probabilities.argmax(1); confidence = probabilities.max(1)
-    errors = np.flatnonzero(y_pred != y_true)
-    errors = errors[np.argsort(confidence[errors])[::-1]][:limit]
+    all_errors = np.flatnonzero(y_pred != y_true)
+    errors = all_errors[np.argsort(confidence[all_errors])[::-1]][:limit]
     rows = []
     for idx in errors:
         seq = x[idx]
@@ -20,5 +20,12 @@ def build_error_analysis(x, y_true, probabilities, case_ids, limit=20):
                          "max_abs_yaw_rate": float(np.abs(seq[:, 3]).max()),
                          "max_wheel_speed_diff": float(np.abs(seq[:, 4]).max()),
                          "max_brake_pressure": float(seq[:, 5].max()), "min_ttc": float(seq[:, 6].min())}})
-    return {"total_errors": int((y_pred != y_true).sum()), "saved_errors": len(rows), "errors": rows}
-
+    transitions = {}
+    for true_id, pred_id in zip(y_true[all_errors], y_pred[all_errors]):
+        key = f"{CLASS_NAMES[int(true_id)]}_to_{CLASS_NAMES[int(pred_id)]}"
+        transitions[key] = transitions.get(key, 0) + 1
+    case_counts = {}
+    for case in case_ids[all_errors]:
+        name = CASE_NAMES[int(case)]; case_counts[name] = case_counts.get(name, 0) + 1
+    return {"total_errors": int((y_pred != y_true).sum()), "saved_errors": len(rows),
+            "transition_counts": transitions, "error_case_counts": case_counts, "errors": rows}

@@ -1,4 +1,37 @@
-# DriveRiskNet V1.1 — Realism Upgrade
+# DriveRiskNet V1.1 — Final
+
+## Overview
+
+PyTorch vehicle time-series risk classification project for demonstrating a reproducible autonomous-driving-oriented model training pipeline. It includes realistic synthetic-data caveats, leakage checks, group-held-out evaluation, training baselines, and multi-seed stability analysis.
+
+### Results at a glance
+
+- 6,000 sequences · 32 timesteps · 7 features
+- Group-disjoint 70/15/15 split · 3 training seeds (42, 123, 2026)
+- Majority and TTC heuristic baselines · MLP and LSTM neural models
+
+| Model | Test macro-F1 |
+|---|---:|
+| Majority baseline | 0.2566 |
+| TTC heuristic | 0.4928 |
+| MLP | 0.5794 ± 0.0060 |
+| LSTM | 0.5973 ± 0.0100 |
+
+LSTM shows a slight average improvement over MLP, but the difference is within run-to-run variance and is not sufficient evidence of clear superiority.
+
+Synthetic data is used to demonstrate the training and evaluation pipeline. Results do not represent real-world autonomous-driving safety performance.
+
+## Quick Start
+
+```bash
+python -m venv .venv
+# Activate the environment, then:
+python -m pip install -e ".[dev]"
+python -m driverisknet.train --model lstm --num-samples 6000 --epochs 35 --split group
+python -m driverisknet.multiseed
+python -m pytest -q
+python -m driverisknet.infer --checkpoint artifacts/checkpoints/lstm_best.pt --dataset data/synthetic_v1_1.npz --index 0
+```
 
 ## Task
 
@@ -20,7 +53,7 @@ Distribution from the reproduced seed-42 run:
 - warning: 1,349 (22.48%)
 - critical: 733 (12.22%)
 
-**This is synthetic data for training-pipeline demonstration and does not represent real-world autonomous-driving validation performance.**
+**Synthetic data is used to demonstrate a reproducible model-training pipeline and does not represent real-world autonomous-driving validation performance.**
 
 ## Split
 
@@ -44,34 +77,41 @@ python -m driverisknet.train --model mlp --num-samples 6000 --epochs 35 --split 
 python -m driverisknet.train --model lstm --num-samples 6000 --epochs 35 --split group
 ```
 
-Training fixes seed 42, applies training-set normalization, inverse-frequency class weights, AdamW, gradient clipping, validation-loss early stopping, and best-checkpoint restoration. JSON histories record train/validation loss and macro-F1; PNG learning curves are generated from those histories.
+Single-seed training defaults to seed 42 and applies training-set normalization, inverse-frequency class weights, AdamW, gradient clipping, validation-loss early stopping, and best-checkpoint restoration. JSON histories record train/validation loss and macro-F1; PNG learning curves are generated from those histories.
+
+## Multi-seed Evaluation
+
+The final protocol fixes dataset generation seed 42 and group-split seed 42, then changes only model initialization and DataLoader shuffle seeds: 42, 123, and 2026. Every run uses the same architecture and hyperparameters. Reported standard deviations are population standard deviations: **mean ± std over 3 seeds**.
+
+```powershell
+python -m driverisknet.multiseed
+```
+
+This one command trains both models for all seeds, aggregates raw metrics into JSON/CSV, selects the seed closest to each model's mean test macro-F1, and regenerates representative curves, confusion matrices, and error analysis.
 
 ## Results
 
-Actual CPU results from a clean V1.1 group-split run:
+Actual CPU multi-seed results:
 
-| Model | Params | Best / run epochs | Val accuracy | Val macro-F1 | Test accuracy | Test precision | Test recall | Test macro-F1 |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| MLP | 12,051 | 17 / 23 | 0.6689 | 0.6107 | 0.6500 | 0.5721 | 0.6284 | 0.5840 |
-| LSTM | 11,187 | 15 / 21 | 0.7022 | 0.6551 | 0.6500 | 0.5722 | 0.6390 | 0.5833 |
+| Model | Params | Val macro-F1 | Test macro-F1 | Test accuracy |
+|---|---:|---:|---:|---:|
+| Majority | — | — | 0.2566 | 0.6256 |
+| Minimum-TTC heuristic | — | — | 0.4928 | 0.6178 |
+| MLP | 12,051 | 0.6040 ± 0.0084 | 0.5794 ± 0.0060 | 0.6422 ± 0.0143 |
+| LSTM | 11,187 | 0.6516 ± 0.0026 | 0.5973 ± 0.0100 | 0.6630 ± 0.0097 |
 
-MLP test confusion matrix (rows true, columns predicted; normal/warning/critical):
+MLP test precision/recall are 0.5710 ± 0.0010 / 0.6274 ± 0.0058. LSTM test precision/recall are 0.5846 ± 0.0087 / 0.6527 ± 0.0097.
 
-```text
-[[400, 136, 27],
- [ 42, 110, 77],
- [  3,  30, 75]]
-```
+LSTM shows a slight average advantage, but the difference is within run-to-run variance and is not strong evidence of superiority. Its mean test macro-F1 advantage is 0.0179, while the models' run-to-run variation and overlapping observed ranges make the result suggestive rather than conclusive.
 
-LSTM test confusion matrix:
+Stability is good under this fixed-data protocol: MLP test macro-F1 ranges 0.5710–0.5840 (range 0.0130, std 0.0060); LSTM ranges 0.5833–0.6060 (range 0.0227, std 0.0100). LSTM varies somewhat more because weighted learning, borderline classes, and validation-loss early stopping affect its recurrent optimization.
 
-```text
-[[401, 137, 25],
- [ 35, 102, 92],
- [  0,  26, 82]]
-```
+## Confusion Matrix
 
-The LSTM is stronger on validation, but its test macro-F1 is 0.0007 below the MLP, so this run does **not** establish a reliable LSTM advantage. Much of the synthetic risk signal can be recovered from static extremes and levels; temporal evolution helps some critical recall but also moves more borderline warnings into critical.
+Confusion matrices are shown for seed 123, the seed closest to mean test macro-F1 for both models—not the best seed.
+
+- [MLP confusion matrix](artifacts/mlp_confusion_matrix.png)
+- [LSTM confusion matrix](artifacts/lstm_confusion_matrix.png)
 
 ## Baselines
 
@@ -84,7 +124,7 @@ The neural models substantially improve macro-F1 over both sanity baselines. The
 
 ## Error Analysis
 
-Both models most often confuse `warning` with its neighboring classes, consistent with deliberate distribution overlap. Among the 20 highest-confidence errors, brake-under-response and routine borderline episodes dominate. The LSTM produces more warning→critical errors, while recovering a slightly larger share of truly critical examples. Machine-readable summaries include true/predicted labels, confidence, case, and key signal statistics.
+Representative seed 123 is used for error analysis. For LSTM, the most common transitions are normal→warning (136), warning→critical (87), warning→normal (30), and critical→warning (25). Low-TTC recovery (61 errors), borderline (36), lateral instability (33), and brake under-response (30) account for many difficult cases; noisy normal contributes 11. This pattern is consistent with intentionally overlapping neighboring risk levels rather than a single deterministic boundary. Machine-readable output retains the 20 highest-confidence mistakes plus aggregate transition and case counts.
 
 ## Inference
 
@@ -111,6 +151,8 @@ The suite checks sequence shape, random split availability, zero group overlap, 
 - `artifacts/error_analysis.json` (LSTM high-confidence errors)
 - `artifacts/baselines.json`
 - `artifacts/results_{mlp,lstm}.json`
+- `artifacts/multiseed_results.{json,csv}`
+- `artifacts/{mlp,lstm}_confusion_matrix.png`
 
 ## Limitations
 
