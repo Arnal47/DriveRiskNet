@@ -1,0 +1,326 @@
+{
+  "total_errors": 315,
+  "saved_errors": 20,
+  "errors": [
+    {
+      "sample_index": 298,
+      "true_label": "warning",
+      "predicted_label": "critical",
+      "confidence": 0.9732696413993835,
+      "case": "brake_under_response",
+      "key_feature_summary": {
+        "mean_speed": 17.159137725830078,
+        "min_longitudinal_accel": -0.9339118003845215,
+        "max_abs_lateral_accel": 0.7804698944091797,
+        "max_abs_yaw_rate": 0.1636761873960495,
+        "max_wheel_speed_diff": 1.4278329610824585,
+        "max_brake_pressure": 5.90626859664917,
+        "min_ttc": 1.2518579959869385
+      }
+    },
+    {
+      "sample_index": 795,
+      "true_label": "warning",
+      "predicted_label": "normal",
+      "confidence": 0.9427010416984558,
+      "case": "routine",
+      "key_feature_summary": {
+        "mean_speed": 29.559532165527344,
+        "min_longitudinal_accel": -2.321460247039795,
+        "max_abs_lateral_accel": 0.9780846834182739,
+        "max_abs_yaw_rate": 0.13503935933113098,
+        "max_wheel_speed_diff": 1.6721042394638062,
+        "max_brake_pressure": 26.11943244934082,
+        "min_ttc": 5.671599388122559
+      }
+    },
+    {
+      "sample_index": 90,
+      "true_label": "warning",
+      "predicted_label": "critical",
+      "confidence": 0.9383410811424255,
+      "case": "brake_under_response",
+      "key_feature_summary": {
+        "mean_speed": 20.572830200195312,
+        "min_longitudinal_accel": -1.374851942062378,
+        "max_abs_lateral_accel": 0.5561634302139282,
+        "max_abs_yaw_rate": 0.10562737286090851,
+        "max_wheel_speed_diff": 2.1724154949188232,
+        "max_brake_pressure": 9.072126388549805,
+        "min_ttc": 1.4125785827636719
+      }
+    },
+    {
+      "sample_index": 630,
+      "true_label": "warning",
+      "predicted_label": "critical",
+      "confidence": 0.9322229027748108,
+      "case": "brake_under_response",
+      "key_feature_summary": {
+        "mean_speed": 22.789710998535156,
+        "min_longitudinal_accel": -1.0291622877120972,
+        "max_abs_lateral_accel": 0.8495883941650391,
+        "max_abs_yaw_rate": 0.16898781061172485,
+        "max_wheel_speed_diff": 0.7002767324447632,
+        "max_brake_pressure": 7.503343105316162,
+        "min_ttc": 2.1234099864959717
+      }
+    },
+    {
+      "sample_index": 264,
+      "true_label": "warning",
+      "predicted_label": "normal",
+      "confidence": 0.9187300205230713,
+      "case": "harsh_braking",
+      "key_feature_summary": {
+        "mean_speed": 19.32164764404297,
+        "min_longitudinal_accel": -4.4875617027282715,
+        "max_abs_lateral_accel": 1.916444182395935,
+        "max_abs_yaw_rate": 0.2147369682788849,
+        "max_wheel_speed_diff": 2.793276309967041,
+        "max_brake_pressure": 37.049095153808594,
+        "min_ttc": 5.814961910247803
+      }
+    },
+    {
+      "sample_index": 585,
+      "true_label": "warning",
+      "predicted_label": "critical",
+      "confidence": 0.9150123596191406,
+      "case": "brake_under_response",
+      "key_feature_summary": {
+        "mean_speed": 18.014148712158203,
+        "min_longitudinal_accel": -2.1813549995422363,
+        "max_abs_lateral_accel": 1.1376986503601074,
+        "max_abs_yaw_rate": 0.15750662982463837,
+        "max_wheel_speed_diff": 1.6629259586334229,
+        "max_brake_pressure": 14.15909194946289,
+        "min_ttc": 1.1802384853363037
+      }
+    },
+    {
+      "sample_index": 648,
+      "true_label": "warning",
+      "predicted_label": "critical",
+      "confidence": 0.9047917127609253,
+      "case": "brake_under_response",
+      "key_feature_summary": {
+        "mean_speed": 13.65250015258789,
+        "min_longitudinal_accel": -1.0865319967269897,
+        "max_abs_lateral_accel": 0.44398701190948486,
+        "max_abs_yaw_rate": 0.118477962911129,
+        "max_wheel_speed_diff": 0.6111609935760498,
+        "max_brake_pressure": 8.7486572265625,
+        "min_ttc": 0.8297000527381897
+      }
+    },
+    {
+      "sample_index": 841,
+      "true_label": "warning",
+      "predicted_label": "normal",
+      "confidence": 0.890254557132721,
+      "case": "routine",
+      "key_feature_summary": {
+        "mean_speed": 6.480653285980225,
+        "min_longitudinal_accel": -1.807601809501648,
+        "max_abs_lateral_accel": 1.129923939704895,
+        "max_abs_yaw_rate": 0.08588242530822754,
+        "max_wheel_speed_diff": 1.1483651399612427,
+        "max_brake_pressure": 15.359077453613281,
+        "min_ttc": 5.265546798706055
+      }
+    },
+    {
+      "sample_index": 431,
+      "true_label": "warning",
+      "predicted_label": "normal",
+      "confidence": 0.8840685486793518,
+      "case": "routine",
+      "key_feature_summary": {
+        "mean_speed": 26.148422241210938,
+        "min_longitudinal_accel": -2.5640604496002197,
+        "max_abs_lateral_accel": 1.242495059967041,
+        "max_abs_yaw_rate": 0.17018702626228333,
+        "max_wheel_speed_diff": 1.913048505783081,
+        "max_brake_pressure": 28.3306884765625,
+        "min_ttc": 2.7224440574645996
+      }
+    },
+    {
+      "sample_index": 600,
+      "true_label": "warning",
+      "predicted_label": "normal",
+      "confidence": 0.8749994039535522,
+      "case": "routine",
+      "key_feature_summary": {
+        "mean_speed": 33.444915771484375,
+        "min_longitudinal_accel": -2.0631978511810303,
+        "max_abs_lateral_accel": 1.8221087455749512,
+        "max_abs_yaw_rate": 0.14090774953365326,
+        "max_wheel_speed_diff": 2.2203423976898193,
+        "max_brake_pressure": 23.091819763183594,
+        "min_ttc": 3.1884262561798096
+      }
+    },
+    {
+      "sample_index": 542,
+      "true_label": "warning",
+      "predicted_label": "critical",
+      "confidence": 0.8686556816101074,
+      "case": "ttc_collapse",
+      "key_feature_summary": {
+        "mean_speed": 21.06439781188965,
+        "min_longitudinal_accel": -2.324368715286255,
+        "max_abs_lateral_accel": 1.4591212272644043,
+        "max_abs_yaw_rate": 0.10951792448759079,
+        "max_wheel_speed_diff": 2.077486515045166,
+        "max_brake_pressure": 26.507198333740234,
+        "min_ttc": 0.25
+      }
+    },
+    {
+      "sample_index": 893,
+      "true_label": "normal",
+      "predicted_label": "critical",
+      "confidence": 0.8664023280143738,
+      "case": "routine",
+      "key_feature_summary": {
+        "mean_speed": 17.904991149902344,
+        "min_longitudinal_accel": -1.6461799144744873,
+        "max_abs_lateral_accel": 1.7739685773849487,
+        "max_abs_yaw_rate": 0.17138850688934326,
+        "max_wheel_speed_diff": 3.4000000953674316,
+        "max_brake_pressure": 11.842107772827148,
+        "min_ttc": 3.0467634201049805
+      }
+    },
+    {
+      "sample_index": 794,
+      "true_label": "warning",
+      "predicted_label": "normal",
+      "confidence": 0.8610664010047913,
+      "case": "routine",
+      "key_feature_summary": {
+        "mean_speed": 37.716468811035156,
+        "min_longitudinal_accel": -2.685624599456787,
+        "max_abs_lateral_accel": 1.1985183954238892,
+        "max_abs_yaw_rate": 0.11530672013759613,
+        "max_wheel_speed_diff": 1.3004953861236572,
+        "max_brake_pressure": 23.722387313842773,
+        "min_ttc": 7.097100257873535
+      }
+    },
+    {
+      "sample_index": 658,
+      "true_label": "warning",
+      "predicted_label": "critical",
+      "confidence": 0.8558141589164734,
+      "case": "brake_under_response",
+      "key_feature_summary": {
+        "mean_speed": 20.22199821472168,
+        "min_longitudinal_accel": -1.2286458015441895,
+        "max_abs_lateral_accel": 0.6619359254837036,
+        "max_abs_yaw_rate": 0.18949560821056366,
+        "max_wheel_speed_diff": 1.4483340978622437,
+        "max_brake_pressure": 8.297572135925293,
+        "min_ttc": 0.25
+      }
+    },
+    {
+      "sample_index": 204,
+      "true_label": "warning",
+      "predicted_label": "normal",
+      "confidence": 0.8531067371368408,
+      "case": "lateral_instability",
+      "key_feature_summary": {
+        "mean_speed": 23.72932243347168,
+        "min_longitudinal_accel": -1.0073119401931763,
+        "max_abs_lateral_accel": 2.068565845489502,
+        "max_abs_yaw_rate": 0.17061154544353485,
+        "max_wheel_speed_diff": 2.7237191200256348,
+        "max_brake_pressure": 10.20441722869873,
+        "min_ttc": 3.037234306335449
+      }
+    },
+    {
+      "sample_index": 95,
+      "true_label": "warning",
+      "predicted_label": "critical",
+      "confidence": 0.8467481732368469,
+      "case": "routine",
+      "key_feature_summary": {
+        "mean_speed": 7.975545406341553,
+        "min_longitudinal_accel": -2.773207902908325,
+        "max_abs_lateral_accel": 2.648695468902588,
+        "max_abs_yaw_rate": 0.18499821424484253,
+        "max_wheel_speed_diff": 2.137327194213867,
+        "max_brake_pressure": 30.33906364440918,
+        "min_ttc": 1.1987053155899048
+      }
+    },
+    {
+      "sample_index": 249,
+      "true_label": "warning",
+      "predicted_label": "normal",
+      "confidence": 0.8418154120445251,
+      "case": "harsh_braking",
+      "key_feature_summary": {
+        "mean_speed": 21.50405502319336,
+        "min_longitudinal_accel": -2.449951171875,
+        "max_abs_lateral_accel": 1.0294100046157837,
+        "max_abs_yaw_rate": 0.1945161521434784,
+        "max_wheel_speed_diff": 1.7610554695129395,
+        "max_brake_pressure": 28.1474609375,
+        "min_ttc": 4.237735271453857
+      }
+    },
+    {
+      "sample_index": 694,
+      "true_label": "warning",
+      "predicted_label": "normal",
+      "confidence": 0.8402580618858337,
+      "case": "routine",
+      "key_feature_summary": {
+        "mean_speed": 37.60898971557617,
+        "min_longitudinal_accel": -1.859756350517273,
+        "max_abs_lateral_accel": 1.583530306816101,
+        "max_abs_yaw_rate": 0.19107016921043396,
+        "max_wheel_speed_diff": 1.5788644552230835,
+        "max_brake_pressure": 22.427064895629883,
+        "min_ttc": 3.5641448497772217
+      }
+    },
+    {
+      "sample_index": 605,
+      "true_label": "warning",
+      "predicted_label": "critical",
+      "confidence": 0.8320168852806091,
+      "case": "brake_under_response",
+      "key_feature_summary": {
+        "mean_speed": 25.480377197265625,
+        "min_longitudinal_accel": -1.603939175605774,
+        "max_abs_lateral_accel": 1.2646726369857788,
+        "max_abs_yaw_rate": 0.16982541978359222,
+        "max_wheel_speed_diff": 1.5156996250152588,
+        "max_brake_pressure": 11.657358169555664,
+        "min_ttc": 2.302872896194458
+      }
+    },
+    {
+      "sample_index": 707,
+      "true_label": "warning",
+      "predicted_label": "critical",
+      "confidence": 0.8291095495223999,
+      "case": "brake_under_response",
+      "key_feature_summary": {
+        "mean_speed": 22.52412223815918,
+        "min_longitudinal_accel": -1.2469080686569214,
+        "max_abs_lateral_accel": 0.8302000761032104,
+        "max_abs_yaw_rate": 0.055890072137117386,
+        "max_wheel_speed_diff": 1.1034117937088013,
+        "max_brake_pressure": 10.093730926513672,
+        "min_ttc": 0.25
+      }
+    }
+  ]
+}

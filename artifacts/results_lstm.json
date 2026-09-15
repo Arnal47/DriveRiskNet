@@ -1,0 +1,114 @@
+{
+  "version": "1.1",
+  "data_config": {
+    "num_samples": 6000,
+    "sequence_length": 32,
+    "seed": 42,
+    "group_size": 20,
+    "normal_ratio": 0.65,
+    "warning_ratio": 0.23,
+    "critical_ratio": 0.12
+  },
+  "train_config": {
+    "model": "lstm",
+    "batch_size": 64,
+    "epochs": 35,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "patience": 6,
+    "hidden_size": 48,
+    "num_layers": 1,
+    "dropout": 0.2,
+    "seed": 42
+  },
+  "split_mode": "group",
+  "split_sizes": {
+    "train": 4200,
+    "validation": 900,
+    "test": 900
+  },
+  "split_group_counts": {
+    "train": 210,
+    "validation": 45,
+    "test": 45
+  },
+  "class_counts": {
+    "0": 3918,
+    "1": 1349,
+    "2": 733
+  },
+  "class_weights": [
+    0.503235082674335,
+    1.5334063526834611,
+    2.772277227722772
+  ],
+  "parameters": 11187,
+  "epochs_completed": 21,
+  "best_epoch": 15,
+  "validation": {
+    "accuracy": 0.7022222222222222,
+    "precision_macro": 0.6424625556024326,
+    "recall_macro": 0.6948997141917698,
+    "f1_macro": 0.6550534402569343,
+    "confusion_matrix": [
+      [
+        416,
+        141,
+        16
+      ],
+      [
+        29,
+        126,
+        52
+      ],
+      [
+        2,
+        28,
+        90
+      ]
+    ],
+    "loss": 0.674585063457489
+  },
+  "test": {
+    "accuracy": 0.65,
+    "precision_macro": 0.5722302441756993,
+    "recall_macro": 0.6389766263557892,
+    "f1_macro": 0.5833200742624138,
+    "confusion_matrix": [
+      [
+        401,
+        137,
+        25
+      ],
+      [
+        35,
+        102,
+        92
+      ],
+      [
+        0,
+        26,
+        82
+      ]
+    ],
+    "loss": 0.7333551687664456
+  },
+  "baselines": {
+    "majority": {
+      "accuracy": 0.6255555555555555,
+      "f1_macro": 0.25655046707678286,
+      "class_id": 0
+    },
+    "ttc_heuristic": {
+      "accuracy": 0.6177777777777778,
+      "f1_macro": 0.4928492415385422,
+      "critical_below": 0.25,
+      "warning_below": 2.6043969011306762
+    }
+  },
+  "error_analysis": {
+    "total_errors": 315,
+    "saved_errors": 20
+  },
+  "training_seconds": 18.84861839999212
+}

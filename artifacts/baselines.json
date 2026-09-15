@@ -1,0 +1,13 @@
+{
+  "majority": {
+    "accuracy": 0.6255555555555555,
+    "f1_macro": 0.25655046707678286,
+    "class_id": 0
+  },
+  "ttc_heuristic": {
+    "accuracy": 0.6177777777777778,
+    "f1_macro": 0.4928492415385422,
+    "critical_below": 0.25,
+    "warning_below": 2.6043969011306762
+  }
+}
